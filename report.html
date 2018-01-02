@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11867,14 +11867,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
 <span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
@@ -11942,9 +11942,9 @@ Standard deviation of prices: $165,171.13
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-RM: Increase in feature value would lead to an increase in MEDV.</p>
-<p>LSTAT: Increase in feature value would lead to a decrease in MEDV.</p>
-<p>PTRATIO: Increate in feature value would lead a decrease in MEDV.</p>
+RM: Increase in feature value would lead to an increase in MEDV. It is quite straightforward that the more rooms are in a house the higher is the house value.</p>
+<p>LSTAT: Increase in feature value would lead to a decrease in MEDV. Most people try to settle with "higher class" neighbors rather than with "lower class" neighbors. Therefore, the less "lower class" people live in a neighborhood, the higher are the value of the houses in this neighborhood.</p>
+<p>PTRATIO: Increase in feature value would lead to a decrease in MEDV. There exist many potential house buyers with school age kids. They try to provide education for their kids where they get more of a teacher's attention, i.e., where there are less students to teacher in average in the neigghborhood. Therefore, the higher student to teacher raio would lead to a decrease in house values in the neighborhood.</p>
 
 </div>
 </div>
@@ -12152,7 +12152,11 @@ RM: Increase in feature value would lead to an increase in MEDV.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Splitting a dataset into training and testing subsets allows assessing the model. Assessing each model is necessary to compare models and find a well-performing model.</p>
+<p><strong>Answer: </strong> Splitting a dataset into training and testing subsets serves several purposes:</p>
+<ul>
+<li>Assessing a model on a subset of available data (the testing subset) allows assessing the model. Assessing each model is necessary to compare models and find a well-performing model. A model's performance on a testing subset is a good estimate of the model's performance on a future true independent dataset</li>
+<li>Assessing a model's performance on various testing subsets of available dataset is a good check on overfitting of the model.</li>
+</ul>
 
 </div>
 </div>
@@ -13816,7 +13820,8 @@ After the maximum depth exceeds the value of 4, each extra set of the degrees of
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong> The k-fold cross-validation: the entire available dataset is divided into k equal subsets. Then the model is trained and validated k times. Each time, one of the k subsets is left out as the validation set, and the remainig k-1 subsets are used for training the model. The results of the k validations are then averaged to assess the model.</p>
-<p>It is not quite obvious what benefit k-fold cross-validation provides over other cross-validation techniques for grid search. One possible advantage is that for each of the k training datasets, all models for parameter combinations for the entire grid can be trained and validated before switching to the next training-testing split. It is still not clear to me whether this would bear any computational benefit.</p>
+<p>If there exist enough available data points, it is benefitial to split the dataset into a larger number of distinct training-testing subsets. For k-fold cross-validation it means using a higher k value. If one were to do parameter tuning on a single training-testing subset split, this would make it susceptible to random variations in the data and in the training process itself. When using more training-testing subsets divisions, the noise in the data and in the training process is avaraged out. It allows getting more robust and reliable cross-validation results.</p>
+<p>When performing a grid search, it is critical to have a robust and reliable method to estimate each parameter configuration.</p>
 
 </div>
 </div>
